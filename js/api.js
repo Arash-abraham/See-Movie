@@ -1,4 +1,6 @@
-let url = location.href;
+let host = location.host;
+let scheme = 'http://';
+let url = scheme + host;
 axios.get(`${url}/api/api.php`)
     .then(function (response) {
         console.log(response.data);
