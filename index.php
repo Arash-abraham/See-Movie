@@ -7,4 +7,7 @@ if ($request_uri == '/Login') {
 else if ($request_uri != '/Login') {
     include 'html/404.html';
 }
+else {
+    include 'html/index.html';
+}
 ?>
