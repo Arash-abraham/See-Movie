@@ -1,4 +1,5 @@
 <?php
+    session_start();
     function connection() {
         global $dbLink;
         try {
@@ -28,5 +29,10 @@
     function hashPassword($ps) {
         $hashedPassword = md5(sha1(md5(base64_encode(md5(md5(sha1(sha1(md5($ps)))))))));
         return $hashedPassword;
+    }
+    function session() {
+        if(!isset($_SESSION['admin_id'])) {
+            header('Location:../html/404.html');
+        }
     }
 ?>
