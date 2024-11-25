@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     require 'lib.php';
     connection();
 ?>
@@ -33,14 +32,16 @@
         if (isset($_POST['Login'])) {
             $user = htmlentities(sanitize($_POST['username']));
             $pass = hashPassword((sanitize($_POST['password'])));
-
-            // print $pass;
             
             $q = "SELECT * FROM `users` WHERE `username` = '{$user}' AND `password` = '{$pass}'";
             $result = mysqli_query($dbLink, $q);
             $row = mysqli_fetch_assoc($result);
             if (isset($row['id'])) {
-                print "<script>alert('Welcom')</script>";
+                if($row['username'] == 'admin') {
+                    $_SESSION['admin_id'] = $row['id'];
+                    $_SESSION['username'] = $row['username'];
+                    header('Location:users.php');
+                }
             }
             else {
                 print "<script>alert('Username Or Password Is Wrong!')</script>";
